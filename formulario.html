@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Carga Masiva</title>
+  <link rel="stylesheet" href="formulario.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Título -->
+    <h1>Gestión de Carga Masiva</h1>
+
+    <!-- Botón para abrir el formulario de registro -->
+    <button id="abrirFormularioBtn">Registrar Nuevo</button>
+
+    <!-- Tabla para mostrar los registros -->
+    <table id="tablaRegistros">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Descripción</th>
+          <th>Ingreso</th>
+          <th>Salida</th>
+          <th>Programación</th>
+          <th>Carga masiva</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Los registros se cargarán dinámicamente aquí -->
+      </tbody>
+    </table>
+
+    <!-- Formulario de registro/edición (oculto por defecto) -->
+    <div id="formularioModal" class="modal">
+      <div class="modal-content">
+        <span id="cerrarModalBtn" class="close">&times;</span>
+        <h2 id="tituloFormulario">Registrar Nuevo Horario</h2>
+        <form id="horarioForm">
+          <div class="form-group">
+            <label for="nombreHorario">Nombre del Horario:</label>
+            <input type="text" id="nombreHorario" name="nombreHorario" required minlength="2"/>
+          </div>
+          <div class="form-group">
+            <label for="ingreso">Ingreso:</label>
+            <input type="time" id="ingreso" name="ingreso" required/>
+          </div>
+          <div class="form-group">
+            <label for="salida">Salida:</label>
+            <input type="time" id="salida" name="salida" required/>
+          </div>
+          <div class="form-group">
+            <label for="programacion">Programación:</label>
+            <!-- <textarea id="descripcion" name="descripcion" required minlength="2"></textarea> -->
+            <input type="text" id="programacion" name="programacion" required/>
+          </div>
+          <div class="form-group">
+            <label for="cargaMasiva">Carga Masiva:</label>
+            <input type="text" id="cargaMasiva" name="cargaMasiva" required>
+          </div>
+          <div class="form-group">
+            <label for="estado">Estado:</label>
+            <select name="estado" id="estado">
+              <option value="0">Inactivo</option>
+              <option value="1">Activo</option>
+            </select>
+          </div>
+          <div class="form-buttons">
+            <button type="submit" id="guardarBtn">Guardar</button>
+            <button type="button" id="cancelarBtn">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="formulario.js" type="module"></script>
+</body>
+</html>

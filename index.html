@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Horario</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="form-container">
+    <h1>Formulario de Horario</h1>
+    <form id="horarioForm">
+      <!-- Campo: Nombre de Horario -->
+      <div class="form-group">
+        <label for="nombreHorario">Nombre de Horario:</label>
+        <input type="text" id="nombreHorario" name="nombreHorario" placeholder="Ej: Horario Mañana">
+        <span class="error-message" id="nombreError"></span>
+      </div>
+
+      <!-- Campo: Descripción -->
+      <div class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <!-- <textarea id="descripcion" name="descripcion" placeholder="Ej: Horario de trabajo de 8am a 12pm"></textarea> -->
+        <input type="text" id="descripcion" name="descripcion" placeholder="Ej: Horario de trabajo de 8am a 12pm">
+        <span class="error-message" id="descripcionError"></span>
+      </div>
+
+      <!-- Campo: Carga Masiva -->
+      <div class="form-group">
+        <label for="cargaMasiva">Carga Masiva:</label>
+        <!-- <input type="file" id="cargaMasiva" name="cargaMasiva"> -->
+        <input type="text" id="cargaMasiva" name="cargaMasiva" placeholder="Ej: M4, según los códigos para carga masiva">
+        <span class="error-message" id="cargaMasivaError"></span>
+      </div>
+
+      <!-- Botones -->
+      <div class="form-buttons">
+        <button type="submit">Guardar</button>
+        <button type="button" id="limpiarBtn">Limpiar Campos</button>
+        <button type="button" id="prueba">Prueba</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="script.js" type="module"></script>
+</body>
+</html>
