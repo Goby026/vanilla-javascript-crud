@@ -18,6 +18,23 @@
     }
   }
 
+  // Función para obtener un registro por id
+  export const obtenerRegistroPorId = async(id)=> {
+    try {
+      const response = await fetch(`${API_URL}/${id}`);
+      if (!response.ok) {
+        throw new Error(
+          `Error al obtener el registro: ${response.statusText}`
+        );
+      }
+      const {horario} = await response.json();
+      return horario;
+    } catch (error) {
+      console.error("Error al obtener el registro solicitado:", error);
+      throw error;
+    }
+  }
+
   // Función para crear un nuevo registro (POST)
   export async function crearRegistro(nuevoRegistro) {
     try {
@@ -31,8 +48,8 @@
       if (!response.ok) {
         throw new Error(`Error al crear el registro: ${response.statusText}`);
       }
-      const data = await response.json();
-      return data;
+      const {horario} = await response.json();
+      return horario;
     } catch (error) {
       console.error("Error en crearRegistro:", error);
       throw error;

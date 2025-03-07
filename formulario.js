@@ -1,7 +1,9 @@
-// import { obtenerRegistros } from "./service";
+import { obtenerRegistros, crearRegistro, obtenerRegistroPorId } from "./service.js";
 
 // URL base de la API
 // const API_URL = "http://localhost:8082/api/v1/carga-masiva";
+
+document.addEventListener("DOMContentLoaded", () => {
 
 // Elementos del DOM
 const tablaRegistros = document.getElementById("tablaRegistros").getElementsByTagName("tbody")[0];
@@ -10,7 +12,7 @@ const formularioModal = document.getElementById("formularioModal");
 const cerrarModalBtn = document.getElementById("cerrarModalBtn");
 const horarioForm = document.getElementById("horarioForm");
 const tituloFormulario = document.getElementById("tituloFormulario");
-const guardarBtn = document.getElementById("guardarBtn");
+// const guardarBtn = document.getElementById("guardarBtn");
 const cancelarBtn = document.getElementById("cancelarBtn");
 
 let registroEditando = null; // Almacena el ID del registro que se está editando
@@ -21,13 +23,18 @@ async function cargarRegistros() {
     const registros = await obtenerRegistros();
     tablaRegistros.innerHTML = ""; // Limpiar la tabla antes de cargar los registros
 
+    // console.log('registros: ----> ',registros);
+
     registros.forEach((registro) => {
       const fila = document.createElement("tr");
       fila.innerHTML = `
         <td>${registro.id}</td>
-        <td>${registro.nombreHorario}</td>
         <td>${registro.descripcion}</td>
-        <td>${registro.cargaMasiva}</td>
+        <td>${registro.ingreso}</td>
+        <td>${registro.salida}</td>
+        <td>${registro.programacion}</td>
+        <td>${registro.cargamasiva}</td>
+        <td>${registro.estado}</td>
         <td class="acciones">
           <button class="editar" onclick="editarRegistro(${registro.id})">Editar</button>
           <button class="eliminar" onclick="eliminarRegistro(${registro.id})">Eliminar</button>
@@ -65,33 +72,31 @@ function cerrarFormulario() {
 horarioForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const nombreHorario = document.getElementById("nombreHorario").value;
+  const descripcion = document.getElementById("nombreHorario").value;
   const ingreso = document.getElementById("ingreso").value;
   const salida = document.getElementById("salida").value;
   const programacion = document.getElementById("programacion").value;
-  const cargaMasiva = document.getElementById("cargaMasiva").value;
+  const cargamasiva = document.getElementById("cargaMasiva").value;
   const estado = document.getElementById("estado").value;
 
   const registro = {
-    nombreHorario,
+    descripcion,
     ingreso,
     salida,
     programacion,
-    cargaMasiva,
+    cargamasiva,
     estado
   }
 
-  console.log(registro);
-
   try {
-    // if (registroEditando) {
-    //   await actualizarRegistro(registroEditando, registro);
-    // } else {
-    //   await crearRegistro(registro);
-    // }
+    if (registroEditando) {
+      await actualizarRegistro(registroEditando, registro);
+    } else {
+      await crearRegistro(registro);
+    }
     
     cerrarFormulario();
-    // cargarRegistros();
+    cargarRegistros();
   } catch (error) {
     console.error("Error al guardar el registro:", error);
   }
@@ -124,3 +129,5 @@ cancelarBtn.addEventListener("click", cerrarFormulario);
 
 // Cargar los registros al iniciar la página
 cargarRegistros();
+
+});
